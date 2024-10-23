@@ -40,3 +40,16 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Angular
+dist/
+coverage/
+.angular/
+npm-debug.log
+yarn-error.log
+.env
+
+# Docker
+docker-compose.override.yml
+Dockerfile
+.dockerignore
