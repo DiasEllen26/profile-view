@@ -1,9 +1,13 @@
 module.exports = {
   content: [
-    "./src/**/*.{html,ts}", // Certifique-se de que o Tailwind está observando os arquivos
+    "./src/**/*.{html,ts}", 
   ],
   theme: {
     extend: {},
   },
   plugins: [require('daisyui')],
+  daisyui: {
+    themes: ["pastel"],
+    
+  },
 }

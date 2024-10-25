@@ -2,7 +2,7 @@
   <h1 class="text-3xl font-bold mb-8 text-center text-info">Profile View</h1>
 
   <div *ngIf="loading" class="text-center my-10">
-    <span class="loading loading-dots loading-l text-info"></span>
+    <span class="loading loading-dots loading-lg text-info"></span>
   </div>
 
   <div *ngIf="error" class="text-center my-10">
@@ -10,7 +10,7 @@
   </div>
 
   <div *ngIf="!loading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <div *ngFor="let user of users" class="card card-compact shadow-lg bg-base-100 text-base-content hover:shadow-2xl transition-shadow duration-300 rounded-xl overflow-hidden">
+    <div *ngFor="let user of paginatedUsers" class="card card-compact shadow-lg bg-base-100 text-base-content hover:shadow-2xl transition-shadow duration-300 rounded-xl overflow-hidden">
       
       <figure class="overflow-hidden h-40">
         <img [src]="user.picture.medium" alt="{{ user.name.first }}" class="w-24 h-24 rounded-full mx-auto mt-4 border-4 border-info">
@@ -28,8 +28,27 @@
             Saiba mais
           </button>
         </div>
-        
       </div>
     </div>
   </div>
+
+  <div class="flex justify-center mt-8" *ngIf="!loading && !error">
+    <button 
+      (click)="prevPage()" 
+      class="join-item btn btn-secondary" 
+      [disabled]="currentPage === 1"
+      [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === 1 }">
+      «
+    </button>
+    <span class="join-item btn btn-neutral">Pagina {{ currentPage }} de {{ totalPages }}</span>
+    <button 
+      (click)="nextPage()" 
+      class="join-item btn btn-accent" 
+      [disabled]="currentPage === totalPages"
+      [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === totalPages }">
+      »
+    </button>
+  </div>
+  
+  
 </div>
