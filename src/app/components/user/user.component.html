@@ -1,0 +1,35 @@
+<div class="container mx-auto mt-5 px-4">
+  <h1 class="text-3xl font-bold mb-8 text-center text-info">Profile View</h1>
+
+  <div *ngIf="loading" class="text-center my-10">
+    <span class="loading loading-dots loading-l text-info"></span>
+  </div>
+
+  <div *ngIf="error" class="text-center my-10">
+    <p class="text-error">Erro ao carregar os usuários.</p>
+  </div>
+
+  <div *ngIf="!loading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div *ngFor="let user of users" class="card card-compact shadow-lg bg-base-100 text-base-content hover:shadow-2xl transition-shadow duration-300 rounded-xl overflow-hidden">
+      
+      <figure class="overflow-hidden h-40">
+        <img [src]="user.picture.medium" alt="{{ user.name.first }}" class="w-24 h-24 rounded-full mx-auto mt-4 border-4 border-info">
+      </figure>
+
+      <div class="card-body text-center p-5">
+        <h2 class="card-title text-xl font-bold text-info">{{ user.name.first }} {{ user.name.last }}</h2>
+        
+        <p class="text-gray-600 dark:text-gray-300"><strong>Email:</strong> {{ user.email }}</p>
+        <p class="text-gray-600 dark:text-gray-300"><strong>Telefone:</strong> {{ user.phone }}</p>
+        <p class="text-gray-600 dark:text-gray-300"><strong>País:</strong> {{ user.location.country }}</p>
+
+        <div class="mt-4">
+          <button class="btn btn-sm btn-success bg-gradient-to-r from-success to-accent text-white px-5 py-2 rounded-full shadow-lg hover:from-accent hover:to-success transition-all duration-300">
+            Saiba mais
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
