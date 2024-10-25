@@ -1,9 +1,9 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.{html,ts}'],
+  content: [
+    "./src/**/*.{html,ts}", // Certifique-se de que o Tailwind está observando os arquivos
+  ],
   theme: {
     extend: {},
   },
-  variants: {},
-  plugins: [],
+  plugins: [require('daisyui')],
 }
