@@ -4,11 +4,17 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../models/user.model';
 import { UserDetailsComponent } from '../user-details/user-details.component'; 
 import { UserService } from './services/user.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, UserDetailsComponent],
+  imports: [
+    HttpClientModule, 
+    CommonModule, 
+    UserDetailsComponent,
+    FormsModule
+  ],
   templateUrl: './user.component.html',
 })
 export class UserComponent {
@@ -20,6 +26,7 @@ export class UserComponent {
   public usersPerPage = 20;
 
   public selectedUserId: string | null = null;
+  public searchTerm: string | null = null;
 
   constructor(private readonly userService: UserService) {
     this.loading = true;
@@ -32,6 +39,24 @@ export class UserComponent {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
     });
+  }
+
+  filterUsers(){
+    this.fetchRandomUsers();
+
+    if(this.searchTerm){
+      const term = this.searchTerm.toLowerCase();
+      
+      const filteredUsers = this.users.filter(user =>
+        user.name.first.toLowerCase().includes(term) ||
+        user.name.last.toLowerCase().includes(term) ||
+        user.email.toLowerCase().includes(term) ||
+        user.location.country.toLowerCase().includes(term)
+      );
+      
+      this.users = filteredUsers;
+      
+    }
   }
 
   get paginatedUsers() {

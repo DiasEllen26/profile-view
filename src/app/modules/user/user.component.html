@@ -1,6 +1,16 @@
 <div class="container mx-auto mt-5 px-4">
   <h1 class="text-3xl font-bold mb-8 text-center text-info">Profile View</h1>
 
+  <div class="mb-6">
+    <input 
+      class="input input-bordered w-full"
+      type="text"
+      placeholder="Pesquisar por nome, email ou país"
+      [(ngModel)]="searchTerm"
+      (input)="filterUsers()"
+    >
+  </div>
+
   <div *ngIf="loading" class="text-center my-10">
     <span class="loading loading-dots loading-lg text-info"></span>
   </div>
