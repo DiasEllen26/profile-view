@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../user/services/user.service';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import userSchema from './user-details.schema';
+
 
 @Component({
   selector: 'app-user-details',
@@ -28,6 +30,7 @@ export class UserDetailsComponent {
   userDetails: User | null = null; 
   loading: boolean = false; 
   error: boolean = false; 
+  fillingErrors: Record<string, string> = {};
 
   constructor(private readonly userService: UserService) {}
 
@@ -75,6 +78,19 @@ export class UserDetailsComponent {
 
   save(): void {
     if(this.userDetails) {
+      const validation = userSchema.safeParse(this.userDetails);
+
+      if (!validation.success) {
+        this.fillingErrors = {};
+
+        validation.error.errors.forEach((err) => {
+          console.log(err.message);
+          this.fillingErrors[err.path.join('.')] = err.message;
+        });
+        
+        return;
+      }
+
       this.userService.updateUser(this.userDetails);
       this.closeEvent.emit();
     }  

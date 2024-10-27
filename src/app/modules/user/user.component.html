@@ -30,7 +30,7 @@
         <h2 class="card-title text-xl font-bold text-info">{{ user.name.first }} {{ user.name.last }}</h2>
         
         <p class="text-gray-600 dark:text-gray-300"><strong>Email:</strong> {{ user.email }}</p>
-        <p class="text-gray-600 dark:text-gray-300"><strong>Telefone:</strong> {{ user.phone }}</p>
+        <p class="text-gray-600 dark:text-gray-300" ><strong>Telefone:</strong> {{ formatPhone(user.phone) }}</p>
         <p class="text-gray-600 dark:text-gray-300"><strong>País:</strong> {{ user.location.country }}</p>
 
         <div class="mt-4">

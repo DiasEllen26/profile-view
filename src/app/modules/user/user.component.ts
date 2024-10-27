@@ -5,6 +5,7 @@ import { User } from '../../models/user.model';
 import { UserDetailsComponent } from '../user-details/user-details.component'; 
 import { UserService } from './services/user.service';
 import { FormsModule } from '@angular/forms';
+import { formatPhoneNumber } from '../../utils/format';
 
 @Component({
   selector: 'app-user',
@@ -97,5 +98,9 @@ export class UserComponent {
     }
 
     this.fetchRandomUsers();
+  }
+
+  formatPhone(phone: string) {
+    return formatPhoneNumber(phone);
   }
 }

@@ -1,33 +1,31 @@
 <div class="modal modal-open">
   <div class="modal-box">
     <div *ngIf="loading">Carregando...</div>
-    <div *ngIf="error">Erro ao carregar os detalhes do usuário.</div>
+    <div *ngIf="error">{{ error }}</div>
 
     <div *ngIf="userDetails && !loading">
       <img [src]="userDetails.picture.large" alt="Imagem do Usuário" class="w-32 h-32 rounded-full mx-auto mt-4 mb-4">
-      
+
       <h2 class="text-2xl font-bold mb-4">{{ userDetails.name.first }} {{ userDetails.name.last }}</h2>
 
       <label class="block mb-2 font-semibold">Nome:</label>
+      <strong><p *ngIf="fillingErrors['name.first']" class="text-red-600">{{ fillingErrors['name.first'] }}</p></strong>  
       <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.first">
 
       <label class="block mb-2 font-semibold">Sobrenome:</label>
+      <strong><p *ngIf="fillingErrors['name.last']" class="text-red-600">{{ fillingErrors['name.last'] }}</p></strong>
       <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.last">
 
       <label class="block mb-2 font-semibold">Email:</label>
-      <input 
-        class="input input-bordered w-full mb-4" 
-        [(ngModel)]="userDetails.email"
-      >
+      <strong><p *ngIf="fillingErrors['email']" class="text-red-600">{{ fillingErrors['email'] }}</p></strong>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.email">
 
       <label class="block mb-2 font-semibold">Telefone:</label>
-      <input 
-        class="input input-bordered w-full mb-4" 
-        [(ngModel)]="userDetails.phone"
-        mask="(99) 99999-9999"
-      >
+      <p *ngIf="fillingErrors['phone']" class="text-red-600">{{ fillingErrors['phone'] }}</p>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.phone" mask="(99) 99999-9999">
 
       <label class="block mb-2 font-semibold">Data de Nascimento:</label>
+      <strong><p *ngIf="fillingErrors['birthDate']" class="text-red-600">{{ fillingErrors['birthDate'] }}</p></strong>
       <input 
         class="input input-bordered w-full mb-4"  
         [(ngModel)]="formattedDate"
@@ -35,15 +33,19 @@
       >
 
       <label class="block mb-2 font-semibold">Estado:</label>
+      <strong><p *ngIf="fillingErrors['location.city']" class="text-red-600">{{ fillingErrors['location.city'] }}</p></strong>
       <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.city">
 
       <label class="block mb-2 font-semibold">País:</label>
+      <strong><p *ngIf="fillingErrors['location.country']" class="text-red-600">{{ fillingErrors['location.country'] }}</p></strong>
       <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.country">
 
       <label class="block mb-2 font-semibold">Nome da Rua:</label>
+      <strong><p *ngIf="fillingErrors['location.street.name']" class="text-red-600">{{ fillingErrors['location.street.name'] }}</p></strong>
       <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.name">
       
       <label class="block mb-2 font-semibold">Nº da Rua:</label>
+      <strong><p *ngIf="fillingErrors['location.street.number']" class="text-red-600">{{ fillingErrors['location.street.number'] }}</p></strong>
       <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.number">
 
       <div class="modal-action">
