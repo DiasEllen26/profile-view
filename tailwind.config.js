@@ -1,13 +1,13 @@
 module.exports = {
   content: [
-    "./src/**/*.{html,ts}", 
+    "./src/**/*.{html,ts,js}", 
   ],
   theme: {
     extend: {},
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ["pastel"],
+    themes: ["pastel", "dracula"],
     
   },
 }

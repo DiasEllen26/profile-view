@@ -24,7 +24,7 @@
         <p class="text-gray-600 dark:text-gray-300"><strong>País:</strong> {{ user.location.country }}</p>
 
         <div class="mt-4">
-          <button class="btn btn-sm btn-success bg-gradient-to-r from-success to-accent text-white px-5 py-2 rounded-full shadow-lg hover:from-accent hover:to-success transition-all duration-300">
+          <button (click)="showDetails(user)" style="cursor: pointer;" class="btn btn-sm btn-success bg-gradient-to-r from-success to-accent text-white px-5 py-2 rounded-full shadow-lg hover:from-accent hover:to-success transition-all duration-300">
             Saiba mais
           </button>
         </div>
@@ -49,6 +49,7 @@
       »
     </button>
   </div>
-  
-  
+
+  <app-user-details *ngIf="selectedUserId" [userId]="selectedUserId" (closeEvent)="closeDetails()"></app-user-details>
 </div>
+

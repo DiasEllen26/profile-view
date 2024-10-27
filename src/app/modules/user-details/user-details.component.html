@@ -1,0 +1,43 @@
+<div class="modal modal-open">
+  <div class="modal-box">
+    <div *ngIf="loading">Carregando...</div>
+    <div *ngIf="error">Erro ao carregar os detalhes do usuário.</div>
+
+    <div *ngIf="userDetails && !loading">
+      <img [src]="userDetails.picture.large" alt="Imagem do Usuário" class="w-32 h-32 rounded-full mx-auto mt-4 mb-4">
+
+      <h2 class="text-2xl font-bold mb-4">{{ userDetails.name.first }} {{ userDetails.name.last }}</h2>
+
+      <label class="block mb-2 font-semibold">Nome:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.first" readonly>
+
+      <label class="block mb-2 font-semibold">Sobrenome:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.last" readonly>
+
+      <label class="block mb-2 font-semibold">Email:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.email" readonly>
+
+      <label class="block mb-2 font-semibold">Telefone:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.phone" readonly>
+
+      <label class="block mb-2 font-semibold">Data de Nascimento:</label>
+      <input class="input input-bordered w-full mb-4"  [value]="formattedDate" readonly>
+
+      <label class="block mb-2 font-semibold">Estado:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.city" readonly>
+
+      <label class="block mb-2 font-semibold">País:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.country" readonly>
+
+      <label class="block mb-2 font-semibold">Nome da Rua:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.name" readonly>
+      
+      <label class="block mb-2 font-semibold">Nº da Rua:</label>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.number" readonly>
+
+      <div class="modal-action">
+        <button (click)="close()" class="btn btn-error">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

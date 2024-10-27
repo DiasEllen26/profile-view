@@ -5,16 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app.routing.module';
-import { RandomUserComponent } from './components/user/user.component';
+import { UserComponent } from './modules/user/user.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    RandomUserComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
