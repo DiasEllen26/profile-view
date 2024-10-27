@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,6 +8,28 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'profileview';
+export class AppComponent implements OnInit {
+  public title = 'profileview';
+  public theme: string = 'light';
+
+  private readonly daisyUIThemeMapper: Record<string, string> = {
+    'light': 'pastel',
+    'dark': 'dark'
+  }
+
+  ngOnInit() {
+    this.theme = localStorage.getItem('theme') || 'light';
+    this.applyTheme();
+  }
+
+  toggleTheme() {
+    this.theme = this.theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', this.theme);
+    this.applyTheme();
+  }
+
+  applyTheme() {
+    document.documentElement.setAttribute('data-theme', this.daisyUIThemeMapper[this.theme]);
+  }
+
 }

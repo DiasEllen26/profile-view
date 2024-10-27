@@ -1,1 +1,7 @@
+<div class="flex justify-end p-4">
+    <button (click)="toggleTheme()" class="btn btn-outline">
+      Alternar para {{ theme === 'light' ? 'mode escuro' : 'modo claro' }}
+    </button>
+</div>
+
 <router-outlet></router-outlet>
