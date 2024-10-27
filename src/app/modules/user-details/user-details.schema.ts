@@ -15,7 +15,7 @@ const userSchema = z.object({
       country: z.string().trim().min(1, { message: "País é obrigatório" }),
       street: z.object({
         name: z.string().trim().min(1, { message: "Nome da rua é obrigatório" }),
-        number: z.string().trim().regex(/^\d+$/, { message: "Número da rua deve ser um número" }),
+        number: z.coerce.string().trim().regex(/^\d+$/, { message: "Número da rua deve ser um número" }),
       }),
     }),
 });

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   public theme: string = 'light';
 
   private readonly daisyUIThemeMapper: Record<string, string> = {
-    'light': 'pastel',
+    'light': 'light',
     'dark': 'dark'
   }
 

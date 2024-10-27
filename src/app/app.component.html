@@ -1,7 +1,22 @@
-<div class="flex justify-end p-4">
-    <button (click)="toggleTheme()" class="btn btn-outline">
-      Alternar para {{ theme === 'light' ? 'mode escuro' : 'modo claro' }}
-    </button>
+<div class="navbar bg-base-200 flex justify-between items-center p-4">
+  <div class="flex-1">
+    <img src="assets/profileviewlogo.png" alt="Profileview" class="h-20 w-auto" /> 
+  </div>
+  <div class="flex-none flex items-center">
+    <span class="text-info mr-2 hidden md:block">
+      <img src="assets/sun.svg" alt="Sol" class="h-5 w-5" />
+    </span>
+    <input type="checkbox" class="toggle toggle-info mx-2" (change)="toggleTheme()" />
+    <span class="text-info hidden md:block">
+      <img src="assets/moon.svg" alt="Lua" class="h-5 w-5" />
+    </span>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
+
+<footer class="footer footer-center bg-info text-info-content p-4">
+  <aside>
+    <p>Copyright © 2024 - All right reserved by Ellen Dias</p>
+  </aside>
+</footer>

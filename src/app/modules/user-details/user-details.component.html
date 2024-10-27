@@ -1,56 +1,99 @@
 <div class="modal modal-open">
-  <div class="modal-box">
-    <div *ngIf="loading">Carregando...</div>
-    <div *ngIf="error">{{ error }}</div>
+  <div class="modal-box w-full max-w-3xl">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">Detalhes do Usuário</h2>
+      <button (click)="close()" class="btn btn-circle btn-sm btn-error">
+        <img src="assets/close.svg" alt="Fechar" class="h-5 w-5" />
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="flex justify-center items-center my-6 text-gray-500"><span className="loading loading-spinner loading-md"></span>
+    </div>
+    <div *ngIf="error" class="text-red-500 text-center">{{ error }}</div>
 
     <div *ngIf="userDetails && !loading">
-      <img [src]="userDetails.picture.large" alt="Imagem do Usuário" class="w-32 h-32 rounded-full mx-auto mt-4 mb-4">
+      <div class="flex justify-center mb-6">
+        <img [src]="userDetails.picture.large" alt="Imagem do Usuário" class="w-24 h-24 rounded-full shadow-lg">
+      </div>
 
-      <h2 class="text-2xl font-bold mb-4">{{ userDetails.name.first }} {{ userDetails.name.last }}</h2>
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text font-semibold">Nome</span>
+        </label>
+        <input [(ngModel)]="userDetails.name.first" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['name.first']}">
+        <p *ngIf="fillingErrors['name.first']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['name.first'] }}</p>
+      </div>
 
-      <label class="block mb-2 font-semibold">Nome:</label>
-      <strong><p *ngIf="fillingErrors['name.first']" class="text-red-600">{{ fillingErrors['name.first'] }}</p></strong>  
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.first">
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text font-semibold">Sobrenome</span>
+        </label>
+        <input [(ngModel)]="userDetails.name.last" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['name.last']}">
+        <p *ngIf="fillingErrors['name.last']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['name.last'] }}</p>
+      </div>
 
-      <label class="block mb-2 font-semibold">Sobrenome:</label>
-      <strong><p *ngIf="fillingErrors['name.last']" class="text-red-600">{{ fillingErrors['name.last'] }}</p></strong>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.last">
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text font-semibold">Email</span>
+        </label>
+        <input [(ngModel)]="userDetails.email" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['email']}">
+        <p *ngIf="fillingErrors['email']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['email'] }}</p>
+      </div>
 
-      <label class="block mb-2 font-semibold">Email:</label>
-      <strong><p *ngIf="fillingErrors['email']" class="text-red-600">{{ fillingErrors['email'] }}</p></strong>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.email">
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text font-semibold">Telefone</span>
+        </label>
+        <input [(ngModel)]="userDetails.phone" class="input input-bordered w-full" mask="(99) 99999-9999" [ngClass]="{'input-error': fillingErrors['phone']}">
+        <p *ngIf="fillingErrors['phone']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['phone'] }}</p>
+      </div>
 
-      <label class="block mb-2 font-semibold">Telefone:</label>
-      <p *ngIf="fillingErrors['phone']" class="text-red-600">{{ fillingErrors['phone'] }}</p>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.phone" mask="(99) 99999-9999">
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text font-semibold">Data de Nascimento</span>
+        </label>
+        <input [(ngModel)]="formattedDate" class="input input-bordered w-full" mask="00/00/0000" [ngClass]="{'input-error': fillingErrors['birthDate']}">
+        <p *ngIf="fillingErrors['birthDate']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['birthDate'] }}</p>
+      </div>
 
-      <label class="block mb-2 font-semibold">Data de Nascimento:</label>
-      <strong><p *ngIf="fillingErrors['birthDate']" class="text-red-600">{{ fillingErrors['birthDate'] }}</p></strong>
-      <input 
-        class="input input-bordered w-full mb-4"  
-        [(ngModel)]="formattedDate"
-        mask="00/00/0000"
-      >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Estado</span>
+          </label>
+          <input [(ngModel)]="userDetails.location.city" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['location.city']}">
+          <p *ngIf="fillingErrors['location.city']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['location.city'] }}</p>
+        </div>
 
-      <label class="block mb-2 font-semibold">Estado:</label>
-      <strong><p *ngIf="fillingErrors['location.city']" class="text-red-600">{{ fillingErrors['location.city'] }}</p></strong>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.city">
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">País</span>
+          </label>
+          <input [(ngModel)]="userDetails.location.country" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['location.country']}">
+          <p *ngIf="fillingErrors['location.country']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['location.country'] }}</p>
+        </div>
+      </div>
 
-      <label class="block mb-2 font-semibold">País:</label>
-      <strong><p *ngIf="fillingErrors['location.country']" class="text-red-600">{{ fillingErrors['location.country'] }}</p></strong>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.country">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Nome da Rua</span>
+          </label>
+          <input [(ngModel)]="userDetails.location.street.name" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['location.street.name']}">
+          <p *ngIf="fillingErrors['location.street.name']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['location.street.name'] }}</p>
+        </div>
 
-      <label class="block mb-2 font-semibold">Nome da Rua:</label>
-      <strong><p *ngIf="fillingErrors['location.street.name']" class="text-red-600">{{ fillingErrors['location.street.name'] }}</p></strong>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.name">
-      
-      <label class="block mb-2 font-semibold">Nº da Rua:</label>
-      <strong><p *ngIf="fillingErrors['location.street.number']" class="text-red-600">{{ fillingErrors['location.street.number'] }}</p></strong>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.number">
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Nº da Rua</span>
+          </label>
+          <input [(ngModel)]="userDetails.location.street.number" class="input input-bordered w-full" [ngClass]="{'input-error': fillingErrors['location.street.number']}">
+          <p *ngIf="fillingErrors['location.street.number']" class="text-red-500 mt-1 text-sm">{{ fillingErrors['location.street.number'] }}</p>
+        </div>
+      </div>
 
-      <div class="modal-action">
-        <button (click)="save()" class="btn btn-primary">Salvar</button>
-        <button (click)="close()" class="btn btn-error">Fechar</button>
+      <div class="modal-action mt-6">
+        <button (click)="save()" class="btn btn-success w-full">Salvar</button>
       </div>
     </div>
   </div>
