@@ -5,37 +5,49 @@
 
     <div *ngIf="userDetails && !loading">
       <img [src]="userDetails.picture.large" alt="Imagem do Usuário" class="w-32 h-32 rounded-full mx-auto mt-4 mb-4">
-
+      
       <h2 class="text-2xl font-bold mb-4">{{ userDetails.name.first }} {{ userDetails.name.last }}</h2>
 
       <label class="block mb-2 font-semibold">Nome:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.first" readonly>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.first">
 
       <label class="block mb-2 font-semibold">Sobrenome:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.last" readonly>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.name.last">
 
       <label class="block mb-2 font-semibold">Email:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.email" readonly>
+      <input 
+        class="input input-bordered w-full mb-4" 
+        [(ngModel)]="userDetails.email"
+      >
 
       <label class="block mb-2 font-semibold">Telefone:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.phone" readonly>
+      <input 
+        class="input input-bordered w-full mb-4" 
+        [(ngModel)]="userDetails.phone"
+        mask="(99) 99999-9999"
+      >
 
       <label class="block mb-2 font-semibold">Data de Nascimento:</label>
-      <input class="input input-bordered w-full mb-4"  [value]="formattedDate" readonly>
+      <input 
+        class="input input-bordered w-full mb-4"  
+        [(ngModel)]="formattedDate"
+        mask="00/00/0000"
+      >
 
       <label class="block mb-2 font-semibold">Estado:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.city" readonly>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.city">
 
       <label class="block mb-2 font-semibold">País:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.country" readonly>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.country">
 
       <label class="block mb-2 font-semibold">Nome da Rua:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.name" readonly>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.name">
       
       <label class="block mb-2 font-semibold">Nº da Rua:</label>
-      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.number" readonly>
+      <input class="input input-bordered w-full mb-4" [(ngModel)]="userDetails.location.street.number">
 
       <div class="modal-action">
+        <button (click)="save()" class="btn btn-primary">Salvar</button>
         <button (click)="close()" class="btn btn-error">Fechar</button>
       </div>
     </div>

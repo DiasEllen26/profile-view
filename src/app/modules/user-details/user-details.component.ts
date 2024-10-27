@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../user/services/user.service';
 import { FormsModule } from '@angular/forms';
-
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-user-details',
@@ -13,7 +13,11 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule, 
     CommonModule, 
     UserDetailsComponent,
-    FormsModule 
+    FormsModule,
+    NgxMaskDirective
+  ],
+  providers: [
+    provideNgxMask()
   ],
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
@@ -26,7 +30,6 @@ export class UserDetailsComponent {
   error: boolean = false; 
 
   constructor(private readonly userService: UserService) {}
-
 
   ngOnChanges(): void {
     if (this.userId) {
@@ -54,6 +57,27 @@ export class UserDetailsComponent {
     return this.userDetails?.dob?.date 
       ? new Date(this.userDetails.dob.date).toLocaleDateString('pt-BR') 
       : '';
+  }
+
+  set formattedDate(value: string) {
+    if (this.userDetails) {      
+      const completedFieldLength = 8;
+      
+      if(value.length === completedFieldLength) {
+        const day = value.substring(0, 2);
+        const month = value.substring(2, 4);
+        const year = value.substring(4, 8); 
+        
+        this.userDetails.dob.date = new Date(+year, +month - 1, +day).toISOString();
+      }
+    }
+  }
+
+  save(): void {
+    if(this.userDetails) {
+      this.userService.updateUser(this.userDetails);
+      this.closeEvent.emit();
+    }  
   }
 
   close() {

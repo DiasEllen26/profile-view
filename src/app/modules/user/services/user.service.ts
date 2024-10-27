@@ -42,4 +42,24 @@ export class UserService {
 
     return undefined;
   }
+
+  updateUser(user: User): void {
+    const usersCached = sessionStorage.getItem(this.userCacheKey);
+
+    if(usersCached) {
+      const usersParsed = JSON.parse(usersCached!) as User[];
+
+      const userIndex = usersParsed.findIndex(u => u.login.uuid === user.login.uuid);
+
+      const userHasFound = userIndex !== -1;
+
+      if(userHasFound) {
+        usersParsed[userIndex] = user;
+        
+        const usersJSON = JSON.stringify(usersParsed);
+        
+        sessionStorage.setItem(this.userCacheKey, usersJSON);
+      }
+    }
+  }
 }

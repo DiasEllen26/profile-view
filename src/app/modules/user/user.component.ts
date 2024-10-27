@@ -89,5 +89,13 @@ export class UserComponent {
   
   closeDetails() {
     this.selectedUserId = null;
+    
+    if(this.searchTerm){
+      this.filterUsers();
+      
+      return;
+    }
+
+    this.fetchRandomUsers();
   }
 }
