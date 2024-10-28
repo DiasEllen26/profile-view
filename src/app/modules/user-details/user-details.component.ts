@@ -84,7 +84,6 @@ export class UserDetailsComponent {
         this.fillingErrors = {};
 
         validation.error.errors.forEach((err) => {
-          console.log(err.message);
           this.fillingErrors[err.path.join('.')] = err.message;
         });
         
