@@ -1,27 +1,47 @@
-# Profileview
+# Profile View
+Este é um projeto de visualização de perfis que permite aos usuários visualizar e gerenciar informações de perfil de forma eficiente.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.10.
+## Pré-requisitos
 
-## Development server
+Antes de começar, certifique-se de ter os seguintes requisitos instalados em sua máquina:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Docker](https://www.docker.com/get-started) (versão mais recente)
+- [Docker Compose](https://docs.docker.com/compose/install/) (se não estiver incluído no Docker)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Como Rodar o Projeto
 
-## Build
+Siga os passos abaixo para rodar o projeto:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Clone o repositório**
 
-## Running unit tests
+   ```bash
+   git clone https://github.com/DiasEllen26/profile-view
+   cd profile-view
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. **Construir e Rodar os Containers**
 
-## Running end-to-end tests
+   Utilize o Docker Compose para construir e iniciar os containers necessários para o projeto:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   docker-compose up --build
+   ```
 
-## Further help
+3. **Acessar a Aplicação**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   Após a conclusão da construção e inicialização dos containers, a aplicação estará disponível em:
+
+   ```plaintext
+   http://localhost:80
+   ```
+
+
+4. **Parar a Aplicação**
+
+   Para parar a aplicação, você pode usar:
+
+   ```bash
+   docker-compose down
+   ```
+
